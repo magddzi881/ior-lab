@@ -45,4 +45,5 @@ public class CzytelnikController {
     public void deleteCzytelnik(@PathVariable Long id) {
         czytelnikService.deleteById(id);
     }
+
 }

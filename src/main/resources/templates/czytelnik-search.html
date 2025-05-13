@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Wyszukaj Czytelnika</title>
+</head>
+<body>
+<h1>Wyszukiwanie Czytelnika</h1>
+
+<form action="#" th:action="@{/czytelnicy/wyszukaj}" method="get">
+    <label for="nazwisko">Nazwisko:</label>
+    <input type="text" id="nazwisko" name="nazwisko" th:value="${nazwisko}">
+    <button type="submit">Szukaj</button>
+</form>
+
+<h2>Wyniki wyszukiwania:</h2>
+
+<table>
+    <thead>
+    <tr>
+        <th>ID</th>
+        <th>Imię</th>
+        <th>Nazwisko</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="czytelnik : ${czytelnicy}">
+        <td th:text="${czytelnik.id}">ID</td>
+        <td th:text="${czytelnik.imie}">Imię</td>
+        <td th:text="${czytelnik.nazwisko}">Nazwisko</td>
+    </tr>
+    </tbody>
+</table>
+
+<a th:href="@{/menu}">Powrót do menu</a>
+
+</body>
+</html>

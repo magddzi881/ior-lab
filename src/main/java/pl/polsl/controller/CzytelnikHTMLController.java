@@ -57,4 +57,18 @@ public class CzytelnikHTMLController {
         czytelnikService.deleteById(id);
         return "redirect:/czytelnicy";
     }
+
+    @GetMapping("/czytelnicy/wyszukaj")
+    public String searchCzytelnicy(@RequestParam(required = false) String nazwisko, Model model) {
+        List<Czytelnik> czytelnicy = null;
+
+        if (nazwisko != null && !nazwisko.isEmpty()) {
+            czytelnicy = czytelnikService.findByNazwisko(nazwisko);
+        }
+
+        model.addAttribute("czytelnicy", czytelnicy);
+        model.addAttribute("nazwisko", nazwisko);
+
+        return "czytelnik-search";
+    }
 }
