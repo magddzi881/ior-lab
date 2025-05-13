@@ -2,6 +2,7 @@ package pl.polsl.model;
 
 import jakarta.persistence.*;
 import lombok.*;
+import org.springframework.data.domain.AbstractAggregateRoot;
 
 @Entity
 @Table(name = "ocena")
@@ -9,6 +10,7 @@ import lombok.*;
 @NoArgsConstructor
 @AllArgsConstructor
 public class Ocena {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -23,6 +25,13 @@ public class Ocena {
     @ManyToOne
     @JoinColumn(name = "czytelnik_id")
     private Czytelnik czytelnik;
+    
+    @PrePersist
+    public void setDefaultComment() {
+        if (komentarz == null || komentarz.isEmpty()) {
+            this.komentarz = "Brak komentarza";
+        }
+    }
 
     public Long getId() {
         return id;

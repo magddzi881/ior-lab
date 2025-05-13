@@ -2,12 +2,14 @@ package pl.polsl.model;
 
 import jakarta.persistence.*;
 import lombok.*;
+import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 @Entity
 @Table(name = "czytelnik")
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
+@EntityListeners(CzytelnikEventListener.class)
 public class Czytelnik {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -15,7 +17,6 @@ public class Czytelnik {
 
     private String imie;
     private String nazwisko;
-
     public Long getId() {
         return id;
     }
