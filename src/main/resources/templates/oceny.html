@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Lista ocen</title>
+</head>
+<body>
+<h1>Lista ocen</h1>
+<a th:href="@{/oceny/nowa}">➕ Dodaj nową ocenę</a>
+<ul>
+    <li th:each="ocena : ${oceny}">
+        <strong th:text="'Ocena: ' + ${ocena.wartosc} + ' ⭐ | Czytelnik: ' + ${ocena.czytelnik.imie + ' ' + ocena.czytelnik.nazwisko} + ' | Książka: ' + ${ocena.ksiazka.tytul}"></strong>
+        <div style="margin-left: 1em;" th:text="${ocena.komentarz}">Komentarz oceny</div>
+
+        <a th:href="@{/oceny/edycja/{id}(id=${ocena.id})}">✏️ Edytuj</a>
+        <a th:href="@{/oceny/usun/{id}(id=${ocena.id})}"
+           th:onclick="return confirm('Czy na pewno chcesz usunąć tę ocenę?')">❌</a>
+        <hr/>
+    </li>
+</ul>
+<a th:href="@{/menu}">Powrót do menu</a>
+</body>
+</html>

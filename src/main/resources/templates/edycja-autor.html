@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Edytuj autora</title>
+</head>
+<body>
+<h1>Edytuj autora</h1>
+<form th:action="@{/autorzy/edycja/{id}(id=${autor.id})}" th:object="${autor}" method="post">
+    <label for="imie">Imię:</label>
+    <input type="text" id="imie" th:field="*{imie}" required /><br/>
+
+    <label for="nazwisko">Nazwisko:</label>
+    <input type="text" id="nazwisko" th:field="*{nazwisko}" required /><br/>
+
+    <button type="submit">Zapisz</button>
+</form>
+<a th:href="@{/autorzy}">Powrót do listy</a>
+</body>
+</html>

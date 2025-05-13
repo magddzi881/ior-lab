@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Lista Książek</title>
+</head>
+<body>
+<h1>Lista Książek</h1>
+<a th:href="@{/ksiazki/nowa}">➕ Dodaj nową książkę</a>
+<ul>
+    <li th:each="ksiazka : ${ksiazki}">
+        <span th:text="${ksiazka.tytul + ' (' + ksiazka.autor.imie + ' ' + ksiazka.autor.nazwisko + ')'}">Tytuł</span>
+        <a th:href="@{/ksiazki/edycja/{id}(id=${ksiazka.id})}">✏️ Edytuj</a>
+        <a th:href="@{/ksiazki/usun/{id}(id=${ksiazka.id})}" th:onclick="return confirm('Czy na pewno chcesz usunąć tę książkę?')">❌</a>
+    </li>
+</ul>
+<a th:href="@{/menu}">Powrót do menu</a>
+</body>
+</html>

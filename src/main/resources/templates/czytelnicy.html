@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Lista Czytelników</title>
+</head>
+<body>
+<h1>Lista Czytelników</h1>
+<a th:href="@{/czytelnicy/nowy}">➕ Dodaj nowego czytelnika</a>
+<ul>
+    <li th:each="czytelnik : ${czytelnicy}">
+        <span th:text="${czytelnik.imie + ' ' + czytelnik.nazwisko}">Czytelnik</span>
+
+        <a th:href="@{/czytelnicy/edycja/{id}(id=${czytelnik.id})}">✏️ Edytuj</a>
+
+        <a th:href="@{/czytelnicy/usun/{id}(id=${czytelnik.id})}" th:onclick="return confirm('Czy na pewno chcesz usunąć tego czytelnika?')">❌</a>
+    </li>
+</ul>
+<a th:href="@{/menu}">Powrót do menu</a>
+</body>
+</html>

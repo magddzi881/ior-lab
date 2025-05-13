@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Lista Autorów</title>
+</head>
+<body>
+<h1>Lista Autorów</h1>
+<a th:href="@{/autorzy/nowy}">➕ Dodaj nowego autora</a>
+<ul>
+    <li th:each="autor : ${autorzyPage.content}">
+        <span th:text="${autor.imie + ' ' + autor.nazwisko}">Autor</span>
+        <a th:href="@{/autorzy/edycja/{id}(id=${autor.id})}">✏️ Edytuj</a>
+        <a th:href="@{/autorzy/usun/{id}(id=${autor.id})}" th:onclick="return confirm('Czy na pewno chcesz usunąć tego autora?')">❌</a>
+    </li>
+</ul>
+
+<!-- Paginacja -->
+<div>
+    <span th:text="'Strona: ' + (${currentPage} + 1) + ' z ' + ${autorzyPage.totalPages}">Strona info</span>
+    <div>
+        <a th:if="${!autorzyPage.first}"
+           th:href="@{'/autorzy'(page=${currentPage - 1}, size=${size}, sort=${sort})}">⬅ Wstecz</a>
+
+        <a th:if="${!autorzyPage.last}"
+           th:href="@{'/autorzy'(page=${currentPage + 1}, size=${size}, sort=${sort})}">Dalej ➡</a>
+    </div>
+</div>
+
+<a th:href="@{/menu}">Powrót do menu</a>
+</body>
+</html>

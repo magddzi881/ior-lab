@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Edytuj ocenę</title>
+</head>
+<body>
+<h1>Edytuj ocenę</h1>
+<form th:action="@{/oceny/edycja/{id}(id=${ocena.id})}" method="post">
+    <label for="wartosc">Wartosc:</label>
+    <input id="wartosc" type="number" name="wartosc" th:value="${ocena.wartosc}" required><br/>
+    <label for="komentarz">Komentarz:</label><br/>
+    <textarea id="komentarz" name="komentarz" th:text="${ocena.komentarz}" rows="4" cols="50"></textarea><br/>
+
+    <label for="ksiazka">Książka:</label>
+    <select id="ksiazka" name="ksiazka" required>
+        <option th:each="k : ${ksiazki}" th:value="${k.id}"
+                th:selected="${ocena.ksiazka.id == k.id}"
+                th:text="${k.tytul}"></option>
+    </select><br/>
+
+    <label for="czytelnik">Czytelnik:</label>
+    <select id="czytelnik" name="czytelnik" required>
+        <option th:each="c : ${czytelnicy}" th:value="${c.id}"
+                th:selected="${ocena.czytelnik.id == c.id}"
+                th:text="${c.imie + ' ' + c.nazwisko}"></option>
+    </select><br/>
+
+    <button type="submit">Zapisz</button>
+</form>
+<a th:href="@{/oceny}">Powrót do listy</a>
+</body>
+</html>
