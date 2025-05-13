@@ -6,14 +6,31 @@
 </head>
 <body>
 <h1>Lista Książek</h1>
+
 <a th:href="@{/ksiazki/nowa}">➕ Dodaj nową książkę</a>
+
 <ul>
     <li th:each="ksiazka : ${ksiazki}">
-        <span th:text="${ksiazka.tytul + ' (' + ksiazka.autor.imie + ' ' + ksiazka.autor.nazwisko + ')'}">Tytuł</span>
-        <a th:href="@{/ksiazki/edycja/{id}(id=${ksiazka.id})}">✏️ Edytuj</a>
-        <a th:href="@{/ksiazki/usun/{id}(id=${ksiazka.id})}" th:onclick="return confirm('Czy na pewno chcesz usunąć tę książkę?')">❌</a>
+        <div>
+            <strong>Tytuł:</strong>
+            <span th:text="${ksiazka.tytul + ' (' + ksiazka.autor.imie + ' ' + ksiazka.autor.nazwisko + ')'}">Tytuł</span>
+        </div>
+        <div>
+            <strong>Utworzono:</strong>
+            <span th:text="${#temporals.format(ksiazka.created, 'yyyy-MM-dd HH:mm')}">data</span>
+        </div>
+        <div>
+            <strong>Zmodyfikowano:</strong>
+            <span th:text="${#temporals.format(ksiazka.modified, 'yyyy-MM-dd HH:mm')}">data</span>
+        </div>
+        <div>
+            <a th:href="@{/ksiazki/edycja/{id}(id=${ksiazka.id})}">✏️ Edytuj</a>
+            <a th:href="@{/ksiazki/usun/{id}(id=${ksiazka.id})}" th:onclick="return confirm('Czy na pewno chcesz usunąć tę książkę?')">❌</a>
+        </div>
+        <hr>
     </li>
 </ul>
+
 <a th:href="@{/menu}">Powrót do menu</a>
 </body>
 </html>
