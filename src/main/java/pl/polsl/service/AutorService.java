@@ -5,6 +5,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import pl.polsl.model.Autor;
+import pl.polsl.projection.AutorView;
 import pl.polsl.repository.AutorRepository;
 
 
@@ -30,6 +31,10 @@ public class AutorService {
 
     public Autor findById(Long id) {
         return autorRepository.findById(id).orElseThrow(() -> new RuntimeException("Autor nie znaleziony"));
+    }
+
+    public List<AutorView> findAllProjected() {
+        return autorRepository.findAllProjectedBy();
     }
 
 

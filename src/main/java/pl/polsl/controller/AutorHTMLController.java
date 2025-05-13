@@ -9,6 +9,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import pl.polsl.model.Autor;
+import pl.polsl.projection.AutorView;
 import pl.polsl.service.AutorService;
 
 import java.util.List;
@@ -75,4 +76,12 @@ public class AutorHTMLController {
         autorService.deleteById(id);
         return "redirect:/autorzy";
     }
+
+    @GetMapping("/autorzy/imiona-nazwiska")
+    public String listAutorNames(Model model) {
+        List<AutorView> autorzy = autorService.findAllProjected();
+        model.addAttribute("autorzy", autorzy);
+        return "autorzy-projekcja";
+    }
+
 }
